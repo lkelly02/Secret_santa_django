@@ -6,8 +6,7 @@ from . import models
 
 @admin.register(models.Member)
 class MemberAdmin(admin.ModelAdmin):
-    list_display = ['first_name', 'last_name',
-                    'email_address', 'phone_number', 'household']
+    list_display = ['name', 'email_address', 'phone_number', 'household']
 
 
 @admin.register(models.Household)

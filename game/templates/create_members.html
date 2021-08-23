@@ -9,7 +9,11 @@
 
 <body>
     <h1>This the is Secret Santa App</h1>
-    <form action=""></form>
+    <form method="POST">
+        {{ csrf_token }}
+        {{ form.as_p }}
+        <input type="Submit" value="Save">
+    </form>
 </body>
 
 </html>
