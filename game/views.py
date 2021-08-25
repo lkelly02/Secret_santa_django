@@ -4,3 +4,7 @@ from django.shortcuts import render
 
 def play_game(request):
     return render(request, 'index.html')
+
+
+def households(request):
+    return render(request, 'households.html')
