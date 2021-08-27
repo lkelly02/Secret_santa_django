@@ -1,8 +1,8 @@
 from django.forms import ModelForm
-from .models import Member
+from .models import HouseholdMember
 
 
 class GameForm(ModelForm):
     class Meta:
-        model = Member
+        model = HouseholdMember
         fields = ['name', 'email_address', 'phone_number', ]

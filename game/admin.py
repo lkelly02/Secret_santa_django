@@ -4,8 +4,8 @@ from . import models
 # Register your models here.
 
 
-@admin.register(models.Member)
-class MemberAdmin(admin.ModelAdmin):
+@admin.register(models.HouseholdMember)
+class HouseholdMemberAdmin(admin.ModelAdmin):
     list_display = ['name', 'email_address', 'phone_number', 'household']
 
 
@@ -15,3 +15,8 @@ class HouseholdAdmin(admin.ModelAdmin):
 
     def members(self, members):
         pass
+
+
+@admin.register(models.GroupMember)
+class GroupMemberAdmin(admin.ModelAdmin):
+    list_display = ['name', 'email_address', 'phone_number']
