@@ -8,10 +8,17 @@
 </head>
 
 <body>
-    {% block content %}
-    <h1>Homepage
-    </h1>
-    {% endblock  %}
+    <header>
+        <h1>Secret Santa Name Generator</h1>
+        <a href="/">Home</a><br>
+    </header>
+    <main>
+        {% block content %}
+        <a href="/game/play_by_households">Play with Households</a><br>
+        <a href="#">Play with one Group</a>
+        <h2>Homepage</h2>
+        {% endblock %}
+    </main>
 </body>
 
 </html>
