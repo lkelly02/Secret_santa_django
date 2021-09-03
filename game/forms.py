@@ -1,9 +1,6 @@
-from django.db.models import fields
-from django.forms import ModelForm
+from django.forms import modelformset_factory
 from .models import HouseholdMember
 
 
-class HouseholdMemberForm(ModelForm):
-    class Meta:
-        model = HouseholdMember
-        fields = ['name', 'email_address', 'phone_number']
+HouseholdMemberFormSet = modelformset_factory(
+    HouseholdMember, fields=('name', 'email_address', 'phone_number', 'household'))

@@ -1,6 +1,7 @@
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
-from .forms import HouseholdMemberForm
+from .forms import HouseholdMemberFormSet
+from .models import HouseholdMember
 # Create your views here.
 
 
@@ -8,26 +9,17 @@ def play_game(request):
     return render(request, 'index.html')
 
 
-def households(request):
-    # # if this is a POST request we need to process the form data
-    form = HouseholdMemberForm()
+def households_formset(request):
+    form = HouseholdMemberFormSet(queryset=HouseholdMember.objects.none())
 
     if request.method == 'POST':
-        #     # create a form instance and populate it with data from the request:
-        form = HouseholdMemberForm(request.POST)
-    #     # check whether it's valid:
+
+        form = HouseholdMemberFormSet(request.POST)
+
         if form.is_valid():
             form.save()
-    #         # process the data in form.cleaned_data as required
-    #         # ...
-    #         # redirect to a new URL:
-    #         return HttpResponseRedirect('/./game/thanks')
-
-    # # if a GET (or any other method) we'll create a blank form
-    # else:
-    #     form = HouseholdMemberForm()
-
-    context = {'form': form}
+            return HttpResponseRedirect('/./game/thanks')
+    context = {'forms': form}
 
     return render(request, 'play_by_households.html', context)
 

@@ -5,18 +5,9 @@
     <h1>This is the households page</h1>
     <form action="" method="POST">
         {% csrf_token %}
-        {{ form }}
+        {{ forms }}
+        <br>
         <input type="submit" value="Submit">
-        {% comment %} <label for="name">Names in household (seperated by commas):</label>
-        <input type="text" name='name' id='name'>
-        <br>
-        <label for="email">Email addresses (seperated by commas):</label>
-        <input type="text" name='email' id='email'>
-        <br>
-        <label for="phone_number">Phone numbers (seperated by commas):</label>
-        <input type="text" name='phone_number' id='phone_number'><br>
-        <button type='submit'>Submit</button><br> {% endcomment %}
-
     </form>
 
 {% endblock  %}
