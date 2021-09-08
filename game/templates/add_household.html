@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block title %}Remove Household{% endblock title %}
+
+{% block content-main %}
+    <form action="" method="POST">
+        {% csrf_token %}
+        {{ householdform }}
+        <input type="Submit">
+    </form>
+
+{% endblock  %}

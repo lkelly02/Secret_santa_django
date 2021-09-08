@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block title %}Remove Household{% endblock title %}
+
+{% block content-main %}
+    <ul>
+        {% for Household in Household_list %}
+        <li>
+            {{ Household.name }}
+        </li>
+        {% endfor %}
+    </ul>
+{% endblock  %}

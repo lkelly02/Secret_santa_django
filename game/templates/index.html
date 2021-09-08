@@ -1,9 +1,11 @@
 {% extends 'base.html' %}
 
-{% block title %}index{% endblock  %}
+{% block title %}index{% endblock %}
 {% block content %}
-    <h1>Game</h1>
-    <ul>
-        <li>Hello</li>
-    </ul>
-{% endblock  %}
+<h1>Game</h1>
+<form method="POST">
+    {% csrf_token %}
+    {{ forms }}
+    <input type="submit">
+</form>
+{% endblock %}

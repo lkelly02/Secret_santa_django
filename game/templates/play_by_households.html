@@ -1,13 +1,26 @@
 {% extends 'base.html' %}
 
 {% block title %}Households{% endblock %}
-{% block content %}
+{% block content-main %}
+    {% load crispy_forms_tags %}
     <h1>This is the households page</h1>
+    {% comment %} {% crispy forms helper %} {% endcomment %}
     <form action="" method="POST">
         {% csrf_token %}
         {{ forms }}
+        <button onclick="myFunction()">Add household member</button>
+        <br>
         <br>
         <input type="submit" value="Submit">
     </form>
-
-{% endblock  %}
+    <div>
+        <label>Current Households</label>
+        <ul>
+            {% for Household in Households %}
+            <li>
+                {{ Household.name }}
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+{% endblock %}
