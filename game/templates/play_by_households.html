@@ -2,17 +2,32 @@
 
 {% block title %}Households{% endblock %}
 {% block content-main %}
-    {% load crispy_forms_tags %}
     <h1>This is the households page</h1>
-    {% comment %} {% crispy forms helper %} {% endcomment %}
-    <form action="" method="POST">
+    <form id="form-container" action="" method="POST">
+        {% csrf_token %}
+        {{householdmember_form.management_form}}
+        {% for form in householdmember_form %}
+            <div class='add_household_form'>
+                {{form}}
+            </div>
+        {% endfor %}
+        <button id="add-householdmember"type="button">Add household member</button>
+        <button type="submit">Create Household</button>
+    </form>
+    {% comment %} <form id="form-container" action="" method="POST">
+        {% csrf_token %}
+        {{household_form.management_form}}
+        {% for form in household_form %}
+            <div class='add_household_form'>
+                {{form}}
+            </div>
+        {% endfor %}
+     </form> 
         {% csrf_token %}
         {{ forms }}
-        <button onclick="myFunction()">Add household member</button>
         <br>
         <br>
-        <input type="submit" value="Submit">
-    </form>
+     {% endcomment %}
     <div>
         <label>Current Households</label>
         <ul>

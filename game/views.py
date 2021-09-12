@@ -10,20 +10,19 @@ def play_game(request):
 
 
 def householdmember_formset(request):
-    form = HouseholdMemberFormSet(queryset=HouseholdMember.objects.none())
-    household_queryset = Household.objects.all()
-    # helper = HouseholdMemberFormSetHelper()
+    householdmember_form = HouseholdMemberFormSet(
+        queryset=HouseholdMember.objects.none())
+    display_household_queryset = Household.objects.all()
     if request.method == 'POST':
 
-        form = HouseholdMemberFormSet(request.POST)
+        householdmember_form = HouseholdMemberFormSet(request.POST)
 
-        if form.is_valid():
-            form.save()
-            return HttpResponseRedirect('/./game/thanks')
-    context = {'forms': form, 'Households': list(
-        household_queryset)}
+        if householdmember_form.is_valid():
+            householdmember_form.save()
+            # return HttpResponseRedirect('/./game/thanks')
 
-    # add in 'helper': helper, to context if you uncomment helper variable.
+    context = {'householdmember_form': householdmember_form,
+               'Households': list(display_household_queryset)}
 
     return render(request, 'play_by_households.html', context)
 
