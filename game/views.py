@@ -6,6 +6,19 @@ from .models import Household, HouseholdMember
 
 
 def play_game(request):
+    household_queryset = Household.objects.all()
+    for household in household_queryset:
+        householdmembers = list(
+            household.householdmember_set.values_list("name", flat=True))
+        print(householdmembers)
+
+    # households = Household.objects.values_list('name', flat=True)
+
+    # for household in households:
+    #     print(type(household))
+    # print(type(households))
+    # print(households)
+
     return render(request, 'index.html')
 
 
