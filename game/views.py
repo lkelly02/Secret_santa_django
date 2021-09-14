@@ -2,22 +2,46 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from .forms import HouseholdMemberFormSet, HouseholdFormSet
 from .models import Household, HouseholdMember
+import random
+from os import system
 # Create your views here.
 
 
 def play_game(request):
     household_queryset = Household.objects.all()
+    list_of_households = []
+    recipients = ""
+    chosen_gift_giver = []
+    chosen_recipient = []
+    random_recipient = ""
     for household in household_queryset:
         householdmembers = list(
             household.householdmember_set.values_list("name", flat=True))
-        print(householdmembers)
+        for member in householdmembers:
+            mem = str(member)
+            recipients += " ".join(mem.split(", ")) + " "
 
-    # households = Household.objects.values_list('name', flat=True)
+        list_of_households.append(householdmembers)
 
-    # for household in households:
-    #     print(type(household))
-    # print(type(households))
-    # print(households)
+    recipients = recipients.split()
+
+    while len(recipients) > 0:
+        for household in list_of_households:
+            for name in household:
+                if name not in chosen_gift_giver:
+                    random_recipient = random.choice(recipients)
+                while name == random_recipient or random_recipient in household:
+                    random_recipient = random.choice(recipients)
+                    if recipients == [name, random_recipient] or recipients == [name] or (len(recipients) == 1 and recipients[0] in household):
+                        recipients.extend(chosen_recipient)
+                        chosen_gift_giver = []
+                        chosen_recipient = []
+                        system("clear")
+                if name != random_recipient and random_recipient not in household:
+                    chosen_gift_giver.append(name)
+                    chosen_recipient.append(random_recipient)
+                    recipients.remove(random_recipient)
+                    print(f"{name.title()} has {random_recipient.title()}")
 
     return render(request, 'index.html')
 
