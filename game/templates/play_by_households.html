@@ -14,6 +14,21 @@
         <button id="add-householdmember"type="button">Add household member</button>
         <button type="submit">Create Household</button>
     </form>
+    <div>
+        <label>Current Households</label>
+        <ul>
+            {% for Household in Households %}
+            <li>
+                {{ Household }}
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+    <div>
+        <h3>Are you ready to play the game using the above households and members? </h3>
+        <button type"button"><a href="/game/">Yes</a></button>
+        <button type"button"><a href="">No</a></button>
+    </div>
     {% comment %} <form id="form-container" action="" method="POST">
         {% csrf_token %}
         {{household_form.management_form}}
@@ -28,14 +43,4 @@
         <br>
         <br>
      {% endcomment %}
-    <div>
-        <label>Current Households</label>
-        <ul>
-            {% for Household in Households %}
-            <li>
-                {{ Household.name }}
-            </li>
-            {% endfor %}
-        </ul>
-    </div>
 {% endblock %}
