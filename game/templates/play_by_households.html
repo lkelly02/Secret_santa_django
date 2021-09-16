@@ -20,6 +20,13 @@
             {% for Household in Households %}
             <li>
                 {{ Household }}
+                <ul>
+                    {% for member in householdmembers %}
+                    {% if Household.id == member.household_id %}
+                        <li>{{member.name}}</li>
+                    {% endif %}
+                    {% endfor %}
+                </ul>    
             </li>
             {% endfor %}
         </ul>

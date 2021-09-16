@@ -49,7 +49,14 @@ def play_game(request):
 def householdmember_formset(request):
     householdmember_form = HouseholdMemberFormSet(
         queryset=HouseholdMember.objects.none())
+
     display_household_queryset = Household.objects.all()
+    members_list = []
+    for household in display_household_queryset:
+        get_members = household.householdmember_set.values()
+        for member in get_members:
+            members_list.append(member)
+    print(members_list)
     if request.method == 'POST':
 
         householdmember_form = HouseholdMemberFormSet(request.POST)
@@ -59,7 +66,7 @@ def householdmember_formset(request):
             # return HttpResponseRedirect('/./game/thanks')
 
     context = {'householdmember_form': householdmember_form,
-               'Households': list(display_household_queryset)}
+               'Households': list(display_household_queryset), 'householdmembers': members_list}
 
     return render(request, 'play_by_households.html', context)
 
