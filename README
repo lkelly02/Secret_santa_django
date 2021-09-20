@@ -2,10 +2,21 @@ Welcome to my Secret Santa Name Generator!
 
 This is my first Python and Django project since starting to program in September of 2020. 
 
-If you would like to replicate this in your own environment, first be sure you have pipenv installed as that is what is used as the virtual environment.
+If your family is like mine, then you know the struggle of picking secret santa names each year.
+Whether it is picking a name multiple times because you picked your own name or a name of someone in your household, 
+or it's the struggle of being together to pick all the names at one time. It is always a struggle. And in most cases, at least in my family,
+we end up finding out who has who ahead of time. 
 
-Then, do a simple 'pipenv install' to install the dependencies. 
+My idea behind this project is to solve all of the above issues.
 
-Current state has limit functionallity, but it can generate the list of names. 
+The primary goal of this secret santa name generator is to be able to take (n) number of households, containing (n) number of household members,
+and instantly generate the secret santa names. 
 
-Please let me know your thoughts!
+To solve the issue of making sure no one knows who has who, the program will either email and/or text each member of the game,
+who they have as their secret santa recipient. 
+
+The secondary goal is to be able to take one big group of people, say an office environment, and simply generate the names and again email and/or text the results.
+
+This is very much a work in progress. 
+
+Let me know your thoughts!
