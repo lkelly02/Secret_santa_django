@@ -23,7 +23,7 @@
                 <ul>
                     {% for member in householdmembers %}
                     {% if Household.id == member.household_id %}
-                        <li>{{member.name}}</li>
+                        <li>{{member.name}} {{member.email_address}} {{member.phone_number}}</li>
                     {% endif %}
                     {% endfor %}
                 </ul>    

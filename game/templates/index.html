@@ -1,5 +1,9 @@
 {% extends 'base.html' %}
 
 {% block title %}index{% endblock %}
-{% block content %}
+{% block content-main %}
+<h2>Game Results</h2>
+{% for result in results %}
+    <p>{{ result }}</p>
+{% endfor %}
 {% endblock %}

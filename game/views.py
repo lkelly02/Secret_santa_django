@@ -43,8 +43,8 @@ def play_game(request):
                 # If not, choose a recipient from the recipient list.
                 if name not in chosen_gift_giver:
                     random_recipient = random.choice(recipients)
-                # If the current household member, picks their name, or the name of someone in THEIR household, another recpient is chosen.
 
+                # If the current household member, picks their name, or the name of someone in THEIR household, another recpient is chosen.
                 while name == random_recipient or random_recipient in household:
                     random_recipient = random.choice(recipients)
                     # In the event that the remaining household member can only pick either their name, or someone in their household,
@@ -67,7 +67,7 @@ def play_game(request):
     return render(request, 'index.html', context={'results': results_of_game})
 
 
-def householdmember_formset(request):
+def add_householdmember(request):
     """The form to add a new household member object"""
     # Default the form to be empty, and hide any existing household member objects.
     householdmember_form = HouseholdMemberFormSet(
@@ -112,14 +112,6 @@ def add_household_formset(request):
     context = {'householdform': form}
 
     return render(request, 'add_household.html', context)
-
-
-def remove_household_formset(request):
-    household_list = Household.objects.all()
-
-    context = {'Household_list': list(household_list)}
-
-    return render(request, 'remove_household.html', context)
 
 
 def thanks(request):
