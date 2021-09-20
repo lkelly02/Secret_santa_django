@@ -4,7 +4,7 @@ This is my first Python and Django project since starting to program in Septembe
 
 If you would like to replicate this in your own environment, first be sure you have pipenv installed as that is what is used as the virtual environment.
 
-Then, do a simple <en>pipenv install</en> to install the dependencies. 
+Then, do a simple 'pipenv install' to install the dependencies. 
 
 Current state has limit functionallity, but it can generate the list of names. 
 
