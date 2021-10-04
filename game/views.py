@@ -1,18 +1,18 @@
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
+from twilio.rest import Client
 from .forms import HouseholdMemberFormSet, HouseholdFormSet
 from .models import Household, HouseholdMember
+import os
 import random
-from os import system
 # Create your views here.
 
 
 def play_game(request):
     """The main function of the secret santa game. This function will gather the households and their members
     and return the results of name drawings"""
-    # Get the list of current households in the database
-    household_queryset = Household.objects.all()
 
+    # variables used throughout script
     list_of_households = []
     chosen_gift_giver = []
     chosen_recipient = []
@@ -20,10 +20,23 @@ def play_game(request):
     random_recipient = ""
     results_of_game = []
 
+    # variables related to sending the sms to each player
+    from_ = os.environ['TWILIO_PHONE_NUMBER']
+    account_sid = os.environ['TWILIO_ACCOUNT_SID']
+    auth_token = os.environ['TWILIO_AUTH_TOKEN']
+
+    # to instantiate the twilio API
+    client = Client(account_sid, auth_token)
+
+    # Get the list of current households in the database
+    household_queryset = Household.objects.all()
+
     # For each household in the database, get the household members associated to it, and add them to a list.
     for household in household_queryset:
         householdmembers = list(
-            household.householdmember_set.values_list("name", flat=True))
+            household.householdmember_set.values_list('name', flat=True))
+        print(householdmembers)
+
         # Extract the household members from each household, and add them to a string of all household members in the game
         for member in householdmembers:
             mem = str(member)
@@ -53,7 +66,7 @@ def play_game(request):
                         recipients.extend(chosen_recipient)
                         chosen_gift_giver = []
                         chosen_recipient = []
-                        system("clear")
+                        os.system("clear")
                 # As long as the current household member does not pick their name, or someone from their hosuehold,
                 # their name will be added to the chosen gift giver list as already picking a name.
                 # The name that was picked, will be added to the chosen recipients list, and removed from the initial recipients list.
@@ -63,6 +76,14 @@ def play_game(request):
                     recipients.remove(random_recipient)
                     results_of_game.append(
                         f"{name.title()} has {random_recipient.title()}")
+                    get_givers_number = HouseholdMember.objects.values().get(name=name)[
+                        'phone_number']
+                    message = client.messages.create(
+                        body=f"The person you have for secret santa is...{random_recipient.title()}",
+                        from_=from_,
+                        to=str(get_givers_number)
+                    )
+                    message.feedback
 
     return render(request, 'index.html', context={'results': results_of_game})
 
