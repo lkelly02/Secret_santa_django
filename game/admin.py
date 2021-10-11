@@ -9,7 +9,8 @@ from django.db.models.aggregates import Count
 
 @admin.register(models.HouseholdMember)
 class HouseholdMemberAdmin(admin.ModelAdmin):
-    list_display = ['name', 'email_address', 'phone_number', 'household']
+    list_display = ['name', 'email_address',
+                    'phone_number', 'household', 'recipient']
     list_select_related = ['household']
 
 
