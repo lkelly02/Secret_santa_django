@@ -16,6 +16,7 @@ class HouseholdMember(models.Model):
     phone_number = models.CharField(max_length=10, blank=True)
     household = models.ForeignKey(
         Household, on_delete=models.PROTECT, null=True, blank=True)
+    recipient = models.CharField(max_length=255, blank=True)
 
     def __str__(self) -> str:
         return self.name
