@@ -1,16 +1,16 @@
-let addHouseholdMemberForm = document.querySelectorAll(".add_household_form")
+let addFormObject = document.querySelectorAll(".add-form-object")
 let container = document.querySelector("#form-container")
-let addButton = document.querySelector("#add-householdmember")
+let addButton = document.querySelector("#add-member")
 let totalForms = document.querySelector("#id_form-TOTAL_FORMS")
 
-let formNum = addHouseholdMemberForm.length - 1 // Get the number of the last form on the page with zero-based indexing
+let formNum = addFormObject.length - 1 // Get the number of the last form on the page with zero-based indexing
 
 addButton.addEventListener('click', addForm)
 
 function addForm(e) {
     e.preventDefault()
 
-    let newForm = addHouseholdMemberForm[0].cloneNode(true) //Clone the householdmember form
+    let newForm = addFormObject[0].cloneNode(true) //Clone the form
     let formRegex = RegExp(`form-(\\d){1}-`, 'g') //Regex to find all instances of the form number
 
     formNum++ //Increment the form number
