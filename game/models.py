@@ -27,6 +27,7 @@ class GroupMember(models.Model):
     name = models.CharField(max_length=255)
     email_address = models.EmailField(unique=True)
     phone_number = models.CharField(max_length=10, blank=True)
+    recipient = models.CharField(max_length=255, blank=True)
 
     def __str__(self) -> str:
         return self.name

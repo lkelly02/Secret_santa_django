@@ -1,18 +1,15 @@
 {% extends 'base.html' %}
 
-{% block title %}play_by_groups{% endblock %}
 {% block content-main %}
-    <h2>Play by groups page</h2>
-    <form id="form-container" action="" method="POST">
-        {% csrf_token %}
-        {{ groupmember_form.management_form }}
-        {% for form in groupmember_form %}
-            <div class="add-form-object">
-                {{ form }}
-            </div>
-        {% endfor %}
-        <button id="add-member" type="button">Add group member</button>
-        <button type="submit">Create game</button>
-    </form>
-    
-{% endblock %}
+    <h1>Play by Groups page</h1>
+
+    <div>
+        <a href="/game/play_by_groups/add_group_members">Add Members</a>
+    </div>
+
+    <div>
+        {{ members }}
+    </div>
+{% endblock content-main %}
+
+

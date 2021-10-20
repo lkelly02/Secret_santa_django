@@ -1,7 +1,7 @@
 from django.db.models.query import QuerySet
 from django.forms import modelformset_factory, ModelForm
 from django.forms.models import inlineformset_factory
-from .models import HouseholdMember, Household
+from .models import HouseholdMember, Household, GroupMember
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Button
 
@@ -9,14 +9,14 @@ from crispy_forms.layout import Button
 class HouseholdForm(ModelForm):
     """The form to create an instance of the Household model."""
     class Meta:
-        Household
+        model = Household
         fields = ("name",)
 
 
 class HouseholdMemberForm(ModelForm):
     """The form to create an instance of a household member."""
     class Meta:
-        HouseholdMember
+        model = HouseholdMember
         fields = ("name", "email_address", "phone_number", "household")
 
 
@@ -26,3 +26,14 @@ HouseholdMemberFormSet = modelformset_factory(
 
 
 HouseholdFormSet = modelformset_factory(Household, form=HouseholdForm)
+
+
+class GroupMemberForm(ModelForm):
+    """The form to create an instance of a group member."""
+    class Meta:
+        model = GroupMember
+        fields = ("name", "phone_number", "email_address")
+
+
+GroupMemberFormSet = modelformset_factory(
+    GroupMember, form=GroupMemberForm)
