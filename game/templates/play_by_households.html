@@ -7,11 +7,11 @@
         {% csrf_token %}
         {{householdmember_form.management_form}}
         {% for form in householdmember_form %}
-            <div class='add_household_form'>
+            <div class='add-form-object'>
                 {{form}}
             </div>
         {% endfor %}
-        <button id="add-householdmember"type="button">Add household member</button>
+        <button id="add-member"type="button">Add household member</button>
         <button type="submit">Create Household</button>
     </form>
     <div>
@@ -33,7 +33,7 @@
     </div>
     <div>
         <h3>Are you ready to play the game using the above households and members? </h3>
-        <button type"button"><a href="/game/">Yes</a></button>
+        <button type"button"><a href="/game/play_by_households">Yes</a></button>
         <button type"button"><a href="">No</a></button>
     </div>
     {% comment %} <form id="form-container" action="" method="POST">
@@ -51,3 +51,7 @@
         <br>
      {% endcomment %}
 {% endblock %}
+{% block content-js-scripts %}
+        {% load static %}
+        <script src="{% static 'js_scripts/add_member.js' %}" type="text/javascript"></script>
+{% endblock content-js-scripts %}
