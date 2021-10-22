@@ -20,3 +20,18 @@ The secondary goal is to be able to take one big group of people, say an office 
 This is very much a work in progress. 
 
 Let me know your thoughts!
+
+To get started with replicating this repo, start by cloning the project:
+
+    - This repo runs using Python 3.8. Unsure if it will work with other versions at this time.
+    - Open the terminal and cd to root directory of project.
+    - The virtual environment used in this is pipenv. If not already installed, run 'pip3 install' pipenv.
+    - With pipenv installed, run 'pipenv install' to create the virtual environment, and automatically install the dependencies noted in the Pipfile.lock file.
+    - Be sure to change the Python interpreter to the new virtual environment path. 
+    - Run 'python manage.py migrate' to create and migrate the database.
+    - Run 'python manage.py runserver'. 
+    - A super user needs to be created in order to access the admin panel. Run 'python manage.py createsuperuser'. 
+
+At this point, the game is functionable. However, the text messaging feature will not work with a cloned repo unless you have your own Twilio account and create a .env file. If you create a .env file, you need to enter the TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN and TWILIO_PHONE_NUMBER in this file. 
+
+Let me know how things work for you!
