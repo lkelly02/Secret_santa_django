@@ -38,4 +38,4 @@ class HouseholdAdmin(admin.ModelAdmin):
 
 @ admin.register(models.GroupMember)
 class GroupMemberAdmin(admin.ModelAdmin):
-    list_display = ['name', 'email_address', 'phone_number']
+    list_display = ['name', 'email_address', 'phone_number', 'recipient']

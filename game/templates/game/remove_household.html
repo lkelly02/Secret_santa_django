@@ -1,10 +1,6 @@
 {% extends 'base.html' %}
 
 {% block title %}Remove Household{% endblock title %}
-{% comment %} <script>
-
-</script> {% endcomment %}
-
 {% block content-main %}
     {% for Household in Household_list %}
         <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
@@ -14,5 +10,5 @@
         <br>
     {% endfor %}
 
-    <button id="delete_household"class="btn btn-danger" type="button" onclick="alert('Are you sure you want to delete these households?.')">Delete</button>
+    <button  id="delete_household" class="btn btn-danger" type="button" onclick="deleteFunction()">Delete</button>
 {% endblock  %}

@@ -1,13 +1,12 @@
-from django.db.models.query import QuerySet
-from django.forms import modelformset_factory, ModelForm
-from django.forms.models import inlineformset_factory
+from django.forms import modelformset_factory, ModelForm, BooleanField
+from django.forms.widgets import HiddenInput
 from .models import HouseholdMember, Household, GroupMember
-from crispy_forms.helper import FormHelper
-from crispy_forms.layout import Button
 
 
 class HouseholdForm(ModelForm):
     """The form to create an instance of the Household model."""
+    add_household = BooleanField(widget=HiddenInput, initial=True)
+
     class Meta:
         model = Household
         fields = ("name",)
@@ -15,6 +14,9 @@ class HouseholdForm(ModelForm):
 
 class HouseholdMemberForm(ModelForm):
     """The form to create an instance of a household member."""
+
+    add_householdmember = BooleanField(widget=HiddenInput, initial=True)
+
     class Meta:
         model = HouseholdMember
         fields = ("name", "email_address", "phone_number", "household")
@@ -25,7 +27,7 @@ HouseholdMemberFormSet = modelformset_factory(
     HouseholdMember, form=HouseholdMemberForm)
 
 
-HouseholdFormSet = modelformset_factory(Household, form=HouseholdForm)
+HouseholdFormSet = modelformset_factory(Household, form=HouseholdForm, extra=4)
 
 
 class GroupMemberForm(ModelForm):

@@ -1,3 +1,4 @@
+from django.views.generic import TemplateView
 from django.http import HttpResponseRedirect
 from django.http.response import HttpResponse, HttpResponseBadRequest
 from django.shortcuts import render, get_object_or_404
@@ -6,6 +7,25 @@ from .forms import HouseholdMemberFormSet, HouseholdFormSet, GroupMemberFormSet
 from .models import Household, HouseholdMember, GroupMember
 import os
 import random
+
+
+class PlayByHouseholds(TemplateView):
+    template_name = 'play_by_households.html'
+
+
+def index(request):
+    form = HouseholdFormSet(queryset=Household.objects.none())
+
+    if request.method == 'POST':
+
+        form = HouseholdFormSet(request.POST)
+
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect('/play_by_households/add_householdmembers/')
+    context = {'householdform': form}
+
+    return render(request, 'base.html', context)
 
 
 def play_game_by_households(request):
@@ -87,15 +107,19 @@ def play_game_by_households(request):
                     giver.save()
                     if get_givers_number == '':
                         pass
-                    print(f"{name.title()} has {random_recipient.title()}")
-                    # message = client.messages.create(
-                    #     body=f"The person you have for secret santa is...{random_recipient.title()}",
-                    #     from_=from_,
-                    #     to=str(get_givers_number)
-                    # )
-                    # message.feedback
-
-    return render(request, 'index.html', context={'results': results_of_game})
+                    message = client.messages.create(
+                        body=f"Hi {name.title()}, the person you have for secret santa is...{random_recipient.title()}",
+                        from_=from_,
+                        to=str(get_givers_number)
+                    )
+                    message.feedback
+    householdmembers_queryset = HouseholdMember.objects.all()
+    context = {
+        'results': results_of_game,
+        'households': household_queryset,
+        'householdmembers': householdmembers_queryset
+    }
+    return render(request, 'play_by_households.html', context)
 
 
 def play_game_by_groups(request):
@@ -157,12 +181,12 @@ def add_householdmember(request):
 
         if householdmember_form.is_valid():
             householdmember_form.save()
-            return HttpResponseRedirect('/./game/play_by_households/add_householdmember')
+            return HttpResponseRedirect('/play_by_households/')
 
     context = {'householdmember_form': householdmember_form,
                'Households': list(display_household_queryset), 'householdmembers': members_list}
 
-    return render(request, 'play_by_households.html', context)
+    return render(request, 'add_householdmembers.html', context)
 
 
 def add_household_formset(request):
@@ -174,7 +198,7 @@ def add_household_formset(request):
 
         if form.is_valid():
             form.save()
-            return HttpResponseRedirect('/./game/play_by_households/add_householdmember')
+            return HttpResponseRedirect('')
     context = {'householdform': form}
 
     return render(request, 'add_household.html', context)

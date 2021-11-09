@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+
+{% block  title%}Add members{% endblock  %}
+
+{% block content-main %}
+    <h1>This is the add household members page</h1>
+
+    <form id="form-container" action="" method="POST">
+        {% csrf_token %}
+        {{householdmember_form.management_form}}
+        {% for form in householdmember_form %}
+            <div class='add-form-object'>
+                {{form}}
+                <button type="button" class="btn btn-danger" id="delete-householdmember-button">x</button>
+            </div>
+        {% endfor %}
+        <button id="add-member"type="button">Add household member</button>
+        <br><button type="submit">Create Household</button>
+    </form>
+{% endblock  %}
+{% block content-js-scripts %}
+        {% load static %}
+        <script src="{% static 'js_scripts/add_member.js' %}" type="text/javascript"></script>
+{% endblock content-js-scripts %}

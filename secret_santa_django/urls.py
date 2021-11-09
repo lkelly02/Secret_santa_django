@@ -20,8 +20,7 @@ import debug_toolbar
 
 
 urlpatterns = [
-    path('', views.home),
+    path('', include('game.urls')),
     path('admin/', admin.site.urls),
-    path('game/', include('game.urls')),
     path('__debug__/', include(debug_toolbar.urls)),
 ]
